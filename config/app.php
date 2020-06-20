@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'en_results_venoudev',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+        * Sources Provider
+        */
+
+        App\Providers\SourcesServiceProvider::class,
 
     ],
 
