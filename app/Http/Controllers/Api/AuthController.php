@@ -50,31 +50,48 @@ class AuthController extends Controller
             break;
 
             default:
-                return $response= $this->errorResponse(
-                    [],
-                    [],
-                    500,
-                    'Unhandled case, please contact with the administrator'
-                );
+                return $response= $this->errorResponse([],[], 500,
+                    'Unhandled case, please contact with the administrator');
             break;
-          }
-
-
-    }
-
-
-    public function register(Request $request){
-        $result = new Result();
-
-        $this->authenticationService->register($request->data());
+        }
     }
 
 
     public function logout(Request $request){
         $result = new Result();
 
-        $this->authenticationService->register($request->data());
+        $this->authenticationService->logout($result);
+        
+        switch ($result->getStatus()) {
+            case 'success':
 
+                return $this->successResponse(
+                    [],
+                    $result->getMessages(),
+                    200,
+                    'Logout proccess complete'
+                );
+
+                break;
+
+            case 'fail' :
+
+                return $response= $this->errorResponse(
+                    $result->getErrors(),
+                    $result->getMessages(),
+                    $result->getCode(),
+                    'exist conflict whit the request, please check the errors and messages'
+                );
+
+                break;
+
+            break;
+
+            default:
+                return $response= $this->errorResponse([],[], 500,
+                    'Unhandled case, please contact with the administrator');
+            break;
+        }
 
     }
 }

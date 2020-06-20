@@ -6,6 +6,7 @@ use App\Services\Contracts\AuthService;
 use Venoudev\Results\Result;
 use App\Validators\LoginValidator;
 use App\Actions\Auth\LoginAction;
+use App\Actions\Auth\LogoutAction;
 
 class AuthServiceImpl implements AuthService{
 
@@ -17,7 +18,6 @@ class AuthServiceImpl implements AuthService{
            return $result;
         }
 
-
         LoginAction::execute($data, $result);
 
 
@@ -26,18 +26,25 @@ class AuthServiceImpl implements AuthService{
         }
 
         $result->setMessages([]);
-        
+
         $result->addMessage('[LOGIN_SUCCESS] # login do correctly');
 
         return $result;
 
     }
 
-    public function register($data, $result):Result{
+    public function logout( $result):Result{
 
-    }
+        LogoutAction::execute($result);
 
-    public function logout($data, $result):Result{
+        if($result->findMessage('[LOGOUT]')==false){
+            $result->setMessages([]);
+            $result->setStatus('fail');
+            $result->addMessage('[LOGOUT_FAIL] # logout error try again later');
+            return $result;
+        }
+
+        return $result;
 
     }
 }
