@@ -16,7 +16,7 @@
         "laravel/passport": "^9.2",
         "laravel/tinker": "^2.0",
         "spatie/laravel-permission": "^3.13",
-        "venoudev/results": "^0.0.5"
+        "venoudev/results": "*@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -62,5 +62,11 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../results"
+        }
+    ]
 }
