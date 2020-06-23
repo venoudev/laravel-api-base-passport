@@ -234,11 +234,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        /*
-        * Custom Aliases
-        */
-
-        'ResultManager'=> Venoudev\Results\Facades\ResultFacade::class,
+        // /*
+        // * Custom Aliases
+        // */
 
     ],
 
