@@ -11,7 +11,7 @@ class LoginValidator
     public static function execute($data, Result $result){
 
         $validator=Validator::make($data,[
-          'email'=> ['required', 'string', 'max:100'],
+          'email'=> ['required', 'string', 'max:100','email'],
           'password'=> ['required', 'string',],
 
         ]);
