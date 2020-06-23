@@ -15,7 +15,7 @@ class AuthServiceImpl implements AuthService{
 
         LoginValidator::execute($data, $result);
 
-        if($result->findMessage('[ERR_CHECK_DATA]')){
+        if($result->findMessage('[CHECK_DATA]')){
            return $result;
         }
 

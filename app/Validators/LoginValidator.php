@@ -21,7 +21,7 @@ class LoginValidator
             $result->setCode(400);
             $result->setStatus('fail');
             $result->setErrors($validator->errors());
-            $result->addMessage('[ERR_CHECK_DATA] # The form has errors whit the inputs');
+            $result->addMessage('[CHECK_DATA] # The form has errors whit the inputs');
 
             return $result;
         }
