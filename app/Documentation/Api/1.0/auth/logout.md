@@ -57,7 +57,7 @@ Content
     "errors": [],
     "messages": [
         {
-            "code_message": "[LOGOUT]",
+            "message_code": "[LOGOUT]",
             "message": "Successfully logged out"
         }
     ]
@@ -67,7 +67,7 @@ Content
 
 Code `401` `Unauthorized` 
 
-## Logout proccess completed or invalid token
+## Logout proccess completed or invalid token
 
 Content
 

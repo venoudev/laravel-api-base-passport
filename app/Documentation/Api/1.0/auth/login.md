@@ -67,7 +67,7 @@ Content
     "errors": [],
     "messages": [
         {
-            "code_message": "[LOGIN_SUCCESS]",
+            "message_code": "[LOGIN_SUCCESS]",
             "message": "login do correctly"
         }
     ]
@@ -83,7 +83,8 @@ Code `400` `Bad Request`
 
 |code_message|message|
 |:-|:-|
-|`[ERR_CHECK_DATA]`|The form has errors whit the inputs.|
+|`[CHECK_DATA]`|The form has errors whit the inputs.|
+|`[FAILED_AUTH]`|Invalid login credential|
 
 ### Errors
 
@@ -93,6 +94,5 @@ Code `400` `Bad Request`
 |:-|:-|:-|
 |`[ERR_REQUIRED]`|`[email]`|The email field is required.|
 |`[ERR_REQUIRED]`|`[password]`|The password field is required.|
-|`[FAILED_AUTH]`|`[NOTHING]`|Invalid login credential|
 
-<larecipe-swagger endpoint="/api/v1/auth/login"></larecipe-swagger>
+

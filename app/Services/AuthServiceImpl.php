@@ -23,6 +23,8 @@ class AuthServiceImpl implements AuthService{
 
 
         if($result->findMessage('[FAILED_AUTH]')){
+            $result->setMessages([]);
+            $result->addMessage('[FAILED_AUTH] # Invalid login credential');
             return $result;
         }
 

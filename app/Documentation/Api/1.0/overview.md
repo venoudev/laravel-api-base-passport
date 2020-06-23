@@ -17,17 +17,17 @@ At [Venoudev](https://venoudev.com) uses [Larecipe](https://github.com/saleem-ha
 {
     "success": bool ,
     "description": "string",
-    "data": { JsonObject{} || JsonArrayObject[] },
+    "data": { JsonObject } || { JsonArrayObject[] },
     "errors": [
         {
-            "code_message": "[CODE]",
-            "field": "[FIELD || NOTHING]",
+            "error_code": "[CODE]",
+            "field": "[field]" || "[NOTHING]",
             "message": "string"
         }
     ],
     "messages": [
         {
-            "code_message": "[CODE]",
+            "message_code": "[CODE]",
             "message": "string"
         }
     ]
@@ -39,7 +39,7 @@ At [Venoudev](https://venoudev.com) uses [Larecipe](https://github.com/saleem-ha
 #### Example
 ```json
     {
-        "code_message": "[LOGIN_SUCCESS]",
+        "message_code": "[LOGIN_SUCCESS]",
         "message": "Login do correctly"
     }
 
@@ -51,9 +51,18 @@ At [Venoudev](https://venoudev.com) uses [Larecipe](https://github.com/saleem-ha
 ```json
 
     {
-        "code_message": "[ERR_REQUIRED]",
+        "error_code": "[ERR_REQUIRED]",
         "field": "[email]",
         "message": "The email field is required."
+    }
+
+```
+```json
+
+    {
+        "error_code": "[ERR_STATUS_USER]",
+        "field": "[NOTHING]",
+        "message": "The status of user is baned."
     }
 
 ```
