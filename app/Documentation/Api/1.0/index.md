@@ -1,0 +1,5 @@
+- ## Get Started
+    - [Overview](/api/docs/{{version}}/overview)
+- ## Auth Api
+    - [Login](/api/docs/{{version}}/auth/login)
+    - [Logout](/api/docs/{{version}}/auth/logout)

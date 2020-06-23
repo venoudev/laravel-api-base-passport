@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "binarytorch/larecipe": "^2.3",
+        "binarytorch/larecipe-swagger": "^0.2.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -16,7 +18,7 @@
         "laravel/passport": "^9.2",
         "laravel/tinker": "^2.0",
         "spatie/laravel-permission": "^3.13",
-        "venoudev/results": "^0.0.5"
+        "venoudev/results": "*@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -62,5 +64,11 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../results"
+        }
+    ]
 }

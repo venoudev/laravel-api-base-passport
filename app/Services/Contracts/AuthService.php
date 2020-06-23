@@ -2,7 +2,7 @@
 
 namespace App\Services\Contracts;
 
-use Venoudev\Results\Result;
+use Venoudev\Results\Contracts\Result;
 
 interface AuthService {
 

@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Contracts\AuthService;
-use Venoudev\Results\Result;
-use  App\Http\Resources\UserLoginResource;
+use App\Http\Resources\UserLoginResource;
+
+use Venoudev\Results\Contracts\Result;
+use ResultManager;
+
+use App;
 
 class AuthController extends Controller
 {
@@ -18,9 +22,10 @@ class AuthController extends Controller
 
     public function login(Request $request){
 
-        $data= $request->only(['email', 'password']);;
+        $data= $request->only(['email', 'password']);
 
-        $result = new Result();
+        //$this->result = new Result();
+        $result= ResultManager::createResult();
 
         $this->authenticationService->login($data, $result);
 
@@ -50,7 +55,7 @@ class AuthController extends Controller
             break;
 
             default:
-                return $response= $this->errorResponse([],[], 500,
+                return $response = $this->errorResponse([],[], 500,
                     'Unhandled case, please contact with the administrator');
             break;
         }
@@ -58,14 +63,15 @@ class AuthController extends Controller
 
 
     public function logout(Request $request){
-        $result = new Result();
 
-        $this->authenticationService->logout($result);
-        
+        $result = ResultManager::createResult();
+
+        $authenticationService->logout($result);
+
         switch ($result->getStatus()) {
             case 'success':
 
-                return $this->successResponse(
+                return $successResponse(
                     [],
                     $result->getMessages(),
                     200,
@@ -76,7 +82,7 @@ class AuthController extends Controller
 
             case 'fail' :
 
-                return $response= $this->errorResponse(
+                return $response= $errorResponse(
                     $result->getErrors(),
                     $result->getMessages(),
                     $result->getCode(),
@@ -88,7 +94,7 @@ class AuthController extends Controller
             break;
 
             default:
-                return $response= $this->errorResponse([],[], 500,
+                return $response= $errorResponse([],[], 500,
                     'Unhandled case, please contact with the administrator');
             break;
         }
