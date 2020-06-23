@@ -24,8 +24,7 @@ class AuthController extends Controller
 
         $data= $request->only(['email', 'password']);
 
-        //$this->result = new Result();
-        $result= ResultManager::createResult();
+        $result = ResultManager::createResult();
 
         $this->authenticationService->login($data, $result);
 

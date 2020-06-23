@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f4ce3c8730f22e4aa95db4ddf36613c",
+    "content-hash": "5ab15c2a163d323fa15deab8d074f1e0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -649,16 +649,16 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "4.3.0",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "ec38ad69ee378a1eec04fb0e417a97cfaf7ed11a"
+                "reference": "9beebf48a1c344ed67c1d36bb1b8709db7c3c1a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/ec38ad69ee378a1eec04fb0e417a97cfaf7ed11a",
-                "reference": "ec38ad69ee378a1eec04fb0e417a97cfaf7ed11a",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/9beebf48a1c344ed67c1d36bb1b8709db7c3c1a8",
+                "reference": "9beebf48a1c344ed67c1d36bb1b8709db7c3c1a8",
                 "shasum": ""
             },
             "require": {
@@ -699,7 +699,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2020-02-22T01:51:47+00:00"
+            "time": "2020-06-23T01:36:47+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -4876,12 +4876,23 @@
         },
         {
             "name": "venoudev/results",
-            "version": "dev-feature/interfaz_provider",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/venoudev/results.git",
+                "reference": "399c2951224ff5c6675c32f31929803c77e01348"
+            },
             "dist": {
-                "type": "path",
-                "url": "../results",
-                "reference": "559ef83ab057715b8015ca7a1a4174bbb145a333",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/venoudev/results/zipball/399c2951224ff5c6675c32f31929803c77e01348",
+                "reference": "399c2951224ff5c6675c32f31929803c77e01348",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0",
+                "illuminate/http": "^7.0",
+                "illuminate/support": "^7.0",
+                "php": "^7.2.5"
             },
             "require-dev": {
                 "orchestra/testbench": "^5.0",
@@ -4901,13 +4912,15 @@
                 },
                 "classmap": []
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "philipretl",
                     "email": "philipretl@gmail.com"
                 }
             ],
-            "description": "A package that gives awesome comunication in your Laravel Application"
+            "description": "A package that gives awesome comunication in your Laravel Application",
+            "time": "2020-06-23T02:04:18+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -7017,9 +7030,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "venoudev/results": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

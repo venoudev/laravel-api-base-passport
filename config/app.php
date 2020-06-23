@@ -238,8 +238,7 @@ return [
         * Custom Aliases
         */
 
-        'ResultManager'=> Venoudev\Results\Facades\ResultFacade::class,
-
+        'ResultManager' => Venoudev\Results\Facades\ResultManagerFacade::class,
     ],
 
 ];
