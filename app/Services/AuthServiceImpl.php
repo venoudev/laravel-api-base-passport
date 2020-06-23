@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
+use Venoudev\Results\Contracts\Result;
+
 use App\Services\Contracts\AuthService;
-use Venoudev\Results\Result;
 use App\Validators\LoginValidator;
 use App\Actions\Auth\LoginAction;
 use App\Actions\Auth\LogoutAction;
@@ -14,7 +15,7 @@ class AuthServiceImpl implements AuthService{
 
         LoginValidator::execute($data, $result);
 
-        if($result->findMessage('[ERR_CHECK_DATA]')){
+        if($result->findMessage('[CHECK_DATA]')){
            return $result;
         }
 
@@ -22,6 +23,8 @@ class AuthServiceImpl implements AuthService{
 
 
         if($result->findMessage('[FAILED_AUTH]')){
+            $result->setMessages([]);
+            $result->addMessage('[FAILED_AUTH] # Invalid login credential');
             return $result;
         }
 

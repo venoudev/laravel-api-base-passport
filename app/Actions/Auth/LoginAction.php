@@ -2,7 +2,8 @@
 
 namespace App\Actions\Auth;
 
-use Venoudev\Results\Result;
+use Venoudev\Results\Contracts\Result;
+
 use Auth;
 
 class LoginAction{
@@ -14,7 +15,7 @@ class LoginAction{
 
             $result->addMessage('[FAILED_AUTH] # Invalid login credential');
             $result->setStatus('fail');
-            $result->setCode(401);
+            $result->setCode(400);
 
             return $result;
         }

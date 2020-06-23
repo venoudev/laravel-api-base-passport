@@ -3,7 +3,7 @@
 namespace App\Actions\Auth;
 
 
-use Venoudev\Results\Result;
+use Venoudev\Results\Contracts\Result;
 use Auth;
 
 class LogoutAction{

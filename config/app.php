@@ -180,6 +180,7 @@ return [
         */
 
         App\Providers\SourcesServiceProvider::class,
+        Venoudev\Results\ResultsServiceProvider::class,
 
     ],
 
@@ -232,6 +233,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+        * Custom Aliases
+        */
+
+        'ResultManager'=> Venoudev\Results\Facades\ResultFacade::class,
 
     ],
 
