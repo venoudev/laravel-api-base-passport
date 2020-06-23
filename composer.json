@@ -18,7 +18,7 @@
         "laravel/passport": "^9.2",
         "laravel/tinker": "^2.0",
         "spatie/laravel-permission": "^3.13",
-        "venoudev/results": "^0.1.3"
+        "venoudev/results": "^0.1.6"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
