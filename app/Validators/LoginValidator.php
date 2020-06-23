@@ -2,7 +2,7 @@
 
 namespace App\Validators;
 
-use VenouDev\Results\Result;
+use Venoudev\Results\Contracts\Result;
 use Illuminate\Support\Facades\Validator;
 
 class LoginValidator

@@ -4,8 +4,9 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Venoudev\Results\Result;
 use Venoudev\Results\Traits\ApiResponser;
+use Venoudev\Results\Contracts\Result;
+use ResultManager;
 
 class Handler extends ExceptionHandler
 {
@@ -56,7 +57,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
 
-            $result= New Result();
+            $result= ResultManager::createResult();
 
             $result->addError('[You don\'t have permission for this action ] # [] # Invalid route');
             $result->setStatus('FAIL');
@@ -70,7 +71,7 @@ class Handler extends ExceptionHandler
             );
         }
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-            $result= New Result();
+            $result= ResultManager::createResult();
 
             $result->addError('[ERR_ROUTE_NOT_FOUND] # [] # Invalid route');
             $result->setStatus('FAIL');
@@ -84,7 +85,7 @@ class Handler extends ExceptionHandler
             );
           }
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
-            $result= New Result();
+            $result= ResultManager::createResult();
 
             $result->addError('[ERR_VERB_HTTP_INVALID] # [] # The verb or method http is not allowed for the server');
             $result->addMessage('[ERR_CHECK_ROUTE] # The route requested could be incorrectly ');
@@ -93,8 +94,8 @@ class Handler extends ExceptionHandler
             $result->setCode(405);
 
             return $this->errorResponse(
-            $result->getAllError(),
-            $result->getAllMessage(),
+            $result->getErrors(),
+            $result->getMessages(),
             $result->getCode(),
             'this is posible because your method or verb http is incorrectly for the route requested'
             );
