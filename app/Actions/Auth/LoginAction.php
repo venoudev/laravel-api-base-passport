@@ -3,36 +3,27 @@
 namespace App\Actions\Auth;
 
 use Venoudev\Results\Contracts\Result;
+use App\Exceptions\FailLoginException;
 
 use Auth;
 
 class LoginAction{
 
 
-    public static function execute($data, Result $result):Result{
+    public static function execute($data ){
 
-        if (!Auth::attempt($data)) {
-
-            $result->addMessage('[FAILED_AUTH] # Invalid login credential');
-            $result->setStatus('fail');
-            $result->setCode(400);
-
-            return $result;
+        if (Auth::attempt($data) == false) {
+            $exception = new FailLoginException();
+            throw $exception;
         }
 
         $user = Auth::user();
         $user->save();
-
         $accessToken = $user->createToken('auth_token')->accessToken;
         $user->access_token = $accessToken;
         $user->roles = $user->getRoleNames()->all();
 
-        $result->setCode(200);
-        $result->setStatus('success');
-        $result->addDatum('[USER]', $user);
-        $result->addMessage('[AUTHENTIFIED] # User authentified correctly');
-
-        return $result;
+        return $user;
 
     }
 

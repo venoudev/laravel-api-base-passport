@@ -4,14 +4,22 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use Venoudev\Results\Traits\ApiResponser;
 use Venoudev\Results\Contracts\Result;
 use ResultManager;
+
+use Venoudev\Results\Exceptions\CheckDataException;
+use Venoudev\Results\Exceptions\NotFoundException;
+
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+use App\Exceptions\FailLoginException;
 
 class Handler extends ExceptionHandler
 {
 
-    use ApiResponser;
+
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -55,52 +63,49 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+        if ($exception instanceof UnauthorizedException) {
 
             $result= ResultManager::createResult();
 
-            $result->addError('[You don\'t have permission for this action ] # [] # Invalid route');
-            $result->setStatus('FAIL');
+            $result->fail();
+            $result->setCode(401);
+            $result->addError('UNAUTHORIZED','You don\'t have permission for this action');
+            $result->setDescription('this is posible because that your rol is incorrectly');
+            return $result->getJsonResponse();
+
+        }
+        if ($exception instanceof NotFoundHttpException) {
+            $result= ResultManager::createResult();
+            $result->fail();
             $result->setCode(403);
+            $result->addError('ERR_ROUTE_NOT_FOUND','Invalid route');
+            $result->setDescription('this is posible because that your route is incorrectly');
+            return $result->getJsonResponse();
 
-            return $this->errorResponse(
-              $result->getErrors(),
-              $result->getMessages(),
-              $result->getCode(),
-              'this is posible because that your rol is incorrectly'
-            );
         }
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
             $result= ResultManager::createResult();
-
-            $result->addError('[ERR_ROUTE_NOT_FOUND] # [] # Invalid route');
-            $result->setStatus('FAIL');
-            $result->setCode(404);
-
-            return $this->errorResponse(
-              $result->getErrors(),
-              $result->getMessages(),
-              $result->getCode(),
-              'this is posible because that your route is incorrectly'
-            );
-          }
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
-            $result= ResultManager::createResult();
-
-            $result->addError('[ERR_VERB_HTTP_INVALID] # [] # The verb or method http is not allowed for the server');
-            $result->addMessage('[ERR_CHECK_ROUTE] # The route requested could be incorrectly ');
-            $result->addMessage('[ERR_CHECK_VERB] # The verb or method http could be incorrectly, remember check the api documentation or check if your verb o method http is [GET, POST, PUT, DELETE]');
-            $result->setStatus('FAIL');
+            $result->fail();
             $result->setCode(405);
-
-            return $this->errorResponse(
-            $result->getErrors(),
-            $result->getMessages(),
-            $result->getCode(),
-            'this is posible because your method or verb http is incorrectly for the route requested'
-            );
-
+            $result->addError('ERR_VERB_HTTP_INVALID','The verb or method http is not allowed for the server');
+            $result->addMessage('ERR_CHECK_ROUTE','The route requested could be incorrectly ');
+            $result->addMessage('ERR_CHECK_VERB','The verb or method http could be incorrectly, remember check the api documentation or check if your verb o method http is [GET, POST, PUT, DELETE]');
+            $result->setDescription('this is posible because your method or verb http is incorrectly for the route requested');
+            return $result->getJsonResponse();
         }
+
+        if($exception instanceof CheckDataException){
+            return $exception->getJsonResponse();
+        }
+        if($exception instanceof NotFoundException){
+            return $exception->getJsonResponse();
+        }
+
+        if($exception instanceof FailLoginException){
+            return $exception->getJsonResponse();
+        }
+
         return parent::render($request, $exception);
     }
 }

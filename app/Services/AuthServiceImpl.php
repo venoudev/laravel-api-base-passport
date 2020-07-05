@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Venoudev\Results\Contracts\Result;
+use Illuminate\Http\Request;
 
 use App\Services\Contracts\AuthService;
 use App\Validators\LoginValidator;
@@ -11,43 +12,15 @@ use App\Actions\Auth\LogoutAction;
 
 class AuthServiceImpl implements AuthService{
 
-    public function login($data, $result):Result{
+    public function login($request){
 
-        LoginValidator::execute($data, $result);
-
-        if($result->findMessage('[CHECK_DATA]')){
-           return $result;
-        }
-
-        LoginAction::execute($data, $result);
-
-
-        if($result->findMessage('[FAILED_AUTH]')){
-            $result->setMessages([]);
-            $result->addMessage('[FAILED_AUTH] # Invalid login credential');
-            return $result;
-        }
-
-        $result->setMessages([]);
-
-        $result->addMessage('[LOGIN_SUCCESS] # login do correctly');
-
-        return $result;
-
+        $data = $request->only(['email', 'password']);
+        LoginValidator::execute($data);
+        return LoginAction::execute($data);
     }
 
-    public function logout( $result):Result{
+    public function logout():void{
 
-        LogoutAction::execute($result);
-
-        if($result->findMessage('[LOGOUT]')==false){
-            $result->setMessages([]);
-            $result->setStatus('fail');
-            $result->addMessage('[LOGOUT_FAIL] # logout error try again later');
-            return $result;
-        }
-
-        return $result;
-
+        LogoutAction::execute();
     }
 }
