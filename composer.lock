@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b336d65bd93b0981ceae01f8491177e3",
+    "content-hash": "0f4ce3c8730f22e4aa95db4ddf36613c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4882,17 +4882,12 @@
         },
         {
             "name": "venoudev/results",
-            "version": "0.1.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/venoudev/results.git",
-                "reference": "803abfe2d104e3410e59c744cb1d60cf28e1e610"
-            },
+            "version": "dev-feature/exceptions",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/venoudev/results/zipball/803abfe2d104e3410e59c744cb1d60cf28e1e610",
-                "reference": "803abfe2d104e3410e59c744cb1d60cf28e1e610",
-                "shasum": ""
+                "type": "path",
+                "url": "../results",
+                "reference": "0e4418a35fa2eca4e10a5a6dd750c6f731af1f1d",
+                "shasum": null
             },
             "require": {
                 "illuminate/console": "^7.0",
@@ -4921,7 +4916,6 @@
                 },
                 "classmap": []
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4935,8 +4929,7 @@
                     "email": "nestor@profesional.co.cr"
                 }
             ],
-            "description": "A package that gives awesome comunication on classes in your Laravel Application and gives your Api Rest awesomes powers and a great structure",
-            "time": "2020-07-05T16:10:26+00:00"
+            "description": "A package that gives awesome comunication on classes in your Laravel Application and gives your Api Rest awesomes powers and a great structure"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -7045,7 +7038,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "venoudev/results": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

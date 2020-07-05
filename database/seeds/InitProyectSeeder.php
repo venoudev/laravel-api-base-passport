@@ -14,22 +14,21 @@ class InitProyectSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@queo.com',
+            'name' => 'admin',
+            'email' => 'admin@venoudev.com',
             'password' => bcrypt('12345678'),
 
         ]);
 
         $roles = [
             'admin',
-            'employee',
         ];
-        
+
         foreach ($roles as $rol) {
             Role::create(['guard_name' => 'api', 'name' => $rol]);
         }
 
-        $user = User::where('email', 'admin@queo.com')->first();
+        $user = User::where('email', 'admin@venoudev.com')->first();
         $user->assignRole('admin');
     }
 }

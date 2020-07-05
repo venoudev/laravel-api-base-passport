@@ -2,23 +2,17 @@
 
 namespace App\Actions\Auth;
 
-
-use Venoudev\Results\Contracts\Result;
 use Auth;
 
 class LogoutAction{
 
-    public static function execute($result):Result{
+    public static function execute(){
 
         $user = Auth::user();
         $user->tokens()->update(['revoked' => true]);
         $user->save();
 
-        $result->addMessage('[LOGOUT] # Successfully logged out');
-        $result->setStatus('success');
-        $result->setCode(200);
-
-        return $result;
+        return;
     }
 
 

@@ -4,11 +4,12 @@ namespace App\Validators;
 
 use Venoudev\Results\Contracts\Result;
 use Illuminate\Support\Facades\Validator;
+use Venoudev\Results\Exceptions\CheckDataException;
 
 class LoginValidator
 {
 
-    public static function execute($data, Result $result){
+    public static function execute($data){
 
         $validator=Validator::make($data,[
           'email'=> ['required', 'string', 'max:100','email'],
@@ -17,20 +18,9 @@ class LoginValidator
         ]);
 
         if ($validator->fails()) {
-
-            $result->setCode(400);
-            $result->setStatus('fail');
-            $result->setErrors($validator->errors());
-            $result->addMessage('[CHECK_DATA] # The form has errors whit the inputs');
-
-            return $result;
+            $exception = new CheckDataException();
+            $exception->addFieldErrors($validator->errors());
+            throw $exception;
         }
-
-        $result->addMessage('[VALIDATED] # login inputs validated');
-
-        return $result;
-
-
     }
-
 }

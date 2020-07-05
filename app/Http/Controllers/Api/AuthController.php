@@ -2,101 +2,42 @@
 
 namespace App\Http\Controllers\Api;
 
+use Venoudev\Results\Contracts\Result;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Services\Contracts\AuthService;
 use App\Http\Resources\UserLoginResource;
-
-use Venoudev\Results\Contracts\Result;
-use ResultManager;
-
-use App;
 
 class AuthController extends Controller
 {
     protected $authenticationService;
+    protected $result;
 
-    public function __construct(AuthService $authenticationService){
+    public function __construct(Result $result, AuthService $authenticationService){
         $this->authenticationService = $authenticationService;
+        $this->result = $result;
     }
 
     public function login(Request $request){
 
-        $data= $request->only(['email', 'password']);
+        $user = $this->authenticationService->login($request);
+        $this->result->success();
+        $this->result->addMessage('AUTHENTIFIED','User authentified correctly');
+        $this->result->setDescription('Welcome Be Awesome!');
+        $this->result->addDatum('user',UserLoginResource::make($user));
 
-        $result = ResultManager::createResult();
-
-        $this->authenticationService->login($data, $result);
-
-        switch ($result->getStatus()) {
-            case 'success':
-
-                return $this->successResponse(
-                    UserLoginResource::make($result->getDatum('[USER]')),
-                    $result->getMessages(),
-                    200,
-                    'Welcome Be Awesome!'
-                );
-
-                break;
-
-            case 'fail' :
-
-                return $response= $this->errorResponse(
-                    $result->getErrors(),
-                    $result->getMessages(),
-                    $result->getCode(),
-                    'exist conflict whit the request, please check the errors and messages'
-                );
-
-                break;
-
-            break;
-
-            default:
-                return $response = $this->errorResponse([],[], 500,
-                    'Unhandled case, please contact with the administrator');
-            break;
-        }
+        return $this->result->getJsonResponse();
     }
 
 
     public function logout(Request $request){
 
-        $result = ResultManager::createResult();
+        $this->authenticationService->logout();
+        $this->result->success();
+        $this->result->addMessage('LOGOUT','Successfully logged out');
+        $this->result->setDescription('See you soon, be Awesome!');
 
-        $authenticationService->logout($result);
-
-        switch ($result->getStatus()) {
-            case 'success':
-
-                return $successResponse(
-                    [],
-                    $result->getMessages(),
-                    200,
-                    'Logout proccess complete'
-                );
-
-                break;
-
-            case 'fail' :
-
-                return $response= $errorResponse(
-                    $result->getErrors(),
-                    $result->getMessages(),
-                    $result->getCode(),
-                    'exist conflict whit the request, please check the errors and messages'
-                );
-
-                break;
-
-            break;
-
-            default:
-                return $response= $errorResponse([],[], 500,
-                    'Unhandled case, please contact with the administrator');
-            break;
-        }
-
+        return $this->result->getJsonResponse();
     }
 }
