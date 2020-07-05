@@ -13,7 +13,7 @@ class LoginAction{
     public static function execute($data ){
 
         if (Auth::attempt($data) == false) {
-            $exception = FailLoginException::make();
+            $exception = new FailLoginException();
             throw $exception;
         }
 
