@@ -180,7 +180,6 @@ return [
         */
 
         App\Providers\SourcesServiceProvider::class,
-        Venoudev\Results\ResultsServiceProvider::class,
 
     ],
 

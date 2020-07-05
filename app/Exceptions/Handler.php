@@ -9,11 +9,15 @@ use ResultManager;
 
 use Venoudev\Results\Exceptions\CheckDataException;
 use Venoudev\Results\Exceptions\NotFoundException;
+use Venoudev\Results\Exceptions\UnauthorizedPassportException;
 
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+use Illuminate\Auth\AuthenticationException;
+
 use App\Exceptions\FailLoginException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -104,6 +108,11 @@ class Handler extends ExceptionHandler
 
         if($exception instanceof FailLoginException){
             return $exception->getJsonResponse();
+        }
+
+        if($exception instanceof AuthenticationException){
+            $exception_internal = new UnauthorizedPassportException();
+            return $exception_internal->getJsonResponse();
         }
 
         return parent::render($request, $exception);

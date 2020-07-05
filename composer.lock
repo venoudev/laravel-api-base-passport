@@ -4882,11 +4882,11 @@
         },
         {
             "name": "venoudev/results",
-            "version": "dev-master",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "../results",
-                "reference": "f750b3a9b326f553e8a8aa93ce47feeacc8abfd4",
+                "reference": "7196094143ba47f64477f88e26c3572028dbdf44",
                 "shasum": null
             },
             "require": {
@@ -4903,7 +4903,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Venoudev\\Results\\ResultsServiceProvider"
+                        "Venoudev\\Results\\Providers\\ResultsServiceProvider"
                     ],
                     "aliases": {
                         "ResultManager": "Venoudev\\Results\\Facades\\ResultManagerFacade"
@@ -4929,7 +4929,7 @@
                     "email": "nestor@profesional.co.cr"
                 }
             ],
-            "description": "An awesome package for construct a very understandable Json structure response in your Laravel proyect for your API Rest."
+            "description": "An awesome package for construct a very understandable Json structure response in your Laravel or Lumen proyect for your API Rest."
         },
         {
             "name": "vlucas/phpdotenv",
