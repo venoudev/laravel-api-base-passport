@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use Venoudev\Results\Contracts\Result;
 use Illuminate\Http\Request;
-
 use App\Services\Contracts\AuthService;
 use App\Validators\LoginValidator;
 use App\Actions\Auth\LoginAction;
